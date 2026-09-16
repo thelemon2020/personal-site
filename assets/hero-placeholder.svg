@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="60%">
+      <stop offset="0" stop-color="#F0A030" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#F0A030" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="750" fill="#181310"/>
+  <rect width="600" height="750" fill="url(#glow)"/>
+  <circle cx="300" cy="300" r="110" fill="#2D2620"/>
+  <path d="M110 750c0-130 85-230 190-230s190 100 190 230z" fill="#2D2620"/>
+  <text x="300" y="700" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="22" fill="#8F847A">Replace with assets/hero.jpeg</text>
+</svg>
