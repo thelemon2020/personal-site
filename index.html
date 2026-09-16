@@ -211,6 +211,7 @@
 
     /* ---------- Built ---------- */
     .group + .group { margin-top: var(--s-section); }
+    .group[hidden] + .group { margin-top: 0; }
     .group-title {
       font-size: 1.875rem; line-height: 1.2;
       padding-bottom: var(--s-sm); margin-bottom: var(--s-lg);
@@ -316,54 +317,78 @@
       <div class="wrap">
         <header class="page-head">
           <p class="label">Speaking</p>
-          <h2 id="talks-title" tabindex="-1">Talks I've given</h2>
+          <h2 id="talks-title" tabindex="-1">Talks</h2>
           <p>Conferences, meetups, and podcasts. Slides and recordings are linked where they exist.</p>
         </header>
-        <ol class="talks" reversed>
-          <li class="card talk">
-            <div class="talk-when">
-              <span class="date">June 2026</span>
-              <span class="meta">Toronto, Canada</span>
-            </div>
-            <div class="talk-body">
-              <span class="event">Laravel Toronto Meetup</span>
-              <h3>Staying True to Yourself in the Age of AI</h3>
-              <p>A discussion on AI and how it has impacted the way developers work.</p>
-              <div class="links">
-                <a class="text-link" href="https://github.com/thelemon2020/laravel-toronto-june-2026">Slides</a>
+        <!-- Upcoming talks move to Past automatically once their data-date has passed. -->
+        <section class="group" id="talks-upcoming-group" aria-labelledby="upcoming-title">
+          <h3 class="group-title" id="upcoming-title">Upcoming</h3>
+          <ol class="talks" id="talks-upcoming">
+            <li class="card talk" data-date="2026-10-16">
+              <div class="talk-when">
+                <span class="date">October 2026</span>
+                <span class="meta">Austin, USA</span>
               </div>
-            </div>
-          </li>
-          <li class="card talk">
-            <div class="talk-when">
-              <span class="date">May 2026</span>
-              <span class="meta">Chicago, USA</span>
-            </div>
-            <div class="talk-body">
-              <span class="event">PHPTek 2026</span>
-              <h3>nginx and You</h3>
-              <p>Most PHP apps run behind nginx, but many developers only touch a small part of what it can do. In this session, we’ll walk through useful nginx features that anyone can start using, even if you’re not a DevOps specialist.</p>
-              <div class="links">
-                <a class="text-link" href="https://github.com/thelemon2020/nginx-and-you">Slides</a>
-                <a class="text-link" href="https://2026.phptek.io/">Conference Site</a>
+              <div class="talk-body">
+                <span class="event">Longhorn PHP 2026</span>
+                <h4>nginx and You</h4>
+                <p>Most PHP apps run behind nginx, but many developers only touch a small part of what it can do. In this session, we’ll walk through useful nginx features that anyone can start using, even if you’re not a DevOps specialist.</p>
+                <div class="links">
+                  <a class="text-link" href="https://longhornphp.com/sessions#nginx-and-you">Session Details</a>
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="card talk">
-            <div class="talk-when">
-              <span class="date">March 2026</span>
-              <span class="meta">Online</span>
-            </div>
-            <div class="talk-body">
-              <span class="event">Community Corner Podcast</span>
-              <h3>Nginx and You with Chris Lemon</h3>
-              <p>A brief overview of my talk at PHPTek 2026.</p>
-              <div class="links">
-                <a class="text-link" href="https://www.youtube.com/watch?v=XFeW2wuOT1w">Video</a>
+            </li>
+          </ol>
+        </section>
+
+        <section class="group" aria-labelledby="past-title">
+          <h3 class="group-title" id="past-title">Past</h3>
+          <ol class="talks" id="talks-past" reversed>
+            <li class="card talk">
+              <div class="talk-when">
+                <span class="date">June 2026</span>
+                <span class="meta">Toronto, Canada</span>
               </div>
-            </div>
-          </li>
-        </ol>
+              <div class="talk-body">
+                <span class="event">Laravel Toronto Meetup</span>
+                <h4>Staying True to Yourself in the Age of AI</h4>
+                <p>A discussion on AI and how it has impacted the way developers work.</p>
+                <div class="links">
+                  <a class="text-link" href="https://github.com/thelemon2020/laravel-toronto-june-2026">Slides</a>
+                </div>
+              </div>
+            </li>
+            <li class="card talk">
+              <div class="talk-when">
+                <span class="date">May 2026</span>
+                <span class="meta">Chicago, USA</span>
+              </div>
+              <div class="talk-body">
+                <span class="event">PHPTek 2026</span>
+                <h4>nginx and You</h4>
+                <p>Most PHP apps run behind nginx, but many developers only touch a small part of what it can do. In this session, we’ll walk through useful nginx features that anyone can start using, even if you’re not a DevOps specialist.</p>
+                <div class="links">
+                  <a class="text-link" href="https://github.com/thelemon2020/nginx-and-you">Slides</a>
+                  <a class="text-link" href="https://2026.phptek.io/">Conference Site</a>
+                </div>
+              </div>
+            </li>
+            <li class="card talk">
+              <div class="talk-when">
+                <span class="date">March 2026</span>
+                <span class="meta">Online</span>
+              </div>
+              <div class="talk-body">
+                <span class="event">Community Corner Podcast</span>
+                <h4>Nginx and You with Chris Lemon</h4>
+                <p>A brief overview of my talk at PHPTek 2026.</p>
+                <div class="links">
+                  <a class="text-link" href="https://www.youtube.com/watch?v=XFeW2wuOT1w">Video</a>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </section>
       </div>
     </section>
 
@@ -452,6 +477,15 @@
         var open = nav.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
       });
+
+      // Move upcoming talks into Past once their date has gone by, newest first.
+      var today = new Date().toLocaleDateString('en-CA');
+      var upcoming = document.getElementById('talks-upcoming');
+      var pastList = document.getElementById('talks-past');
+      Array.prototype.slice.call(upcoming.querySelectorAll('[data-date]')).forEach(function (talk) {
+        if (talk.dataset.date < today) pastList.insertBefore(talk, pastList.firstChild);
+      });
+      if (!upcoming.children.length) document.getElementById('talks-upcoming-group').hidden = true;
 
       window.addEventListener('hashchange', show);
       // Browsers jump to the #anchor after load; each "page" should open at the top.
