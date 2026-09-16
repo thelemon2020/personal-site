@@ -326,7 +326,7 @@
           <ol class="talks" id="talks-upcoming">
             <li class="card talk" data-date="2026-10-16">
               <div class="talk-when">
-                <span class="date">October 2026</span>
+                <span class="date">October 16, 2026</span>
                 <span class="meta">Austin, USA</span>
               </div>
               <div class="talk-body">
@@ -483,7 +483,11 @@
       var upcoming = document.getElementById('talks-upcoming');
       var pastList = document.getElementById('talks-past');
       Array.prototype.slice.call(upcoming.querySelectorAll('[data-date]')).forEach(function (talk) {
-        if (talk.dataset.date < today) pastList.insertBefore(talk, pastList.firstChild);
+        if (talk.dataset.date >= today) return;
+        // Past talks show month and year only, like the rest of the list.
+        talk.querySelector('.date').textContent = new Date(talk.dataset.date + 'T12:00')
+          .toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        pastList.insertBefore(talk, pastList.firstChild);
       });
       if (!upcoming.children.length) document.getElementById('talks-upcoming-group').hidden = true;
 
