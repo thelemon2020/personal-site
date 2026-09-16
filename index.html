@@ -110,7 +110,7 @@
     }
 
     /* ---------- Pages ---------- */
-    main { flex: 1; }
+    main { flex: 1; overflow-x: clip; }
     .page { padding: var(--s-section) 0; }
     .js .page:not(.active) { display: none; }
     .page-head { margin-bottom: var(--s-xl); display: grid; gap: var(--s-sm); }
@@ -130,6 +130,10 @@
     @media (min-width: 768px) {
       .hero { grid-template-columns: 1.2fr 1fr; gap: var(--s-section); }
     }
+    /* Same right column as the bio so the photo and the Connect card line up. */
+    @media (min-width: 900px) {
+      .hero { grid-template-columns: 1fr 26rem; gap: var(--s-xl); }
+    }
     .hero-text { display: grid; gap: var(--s-md); }
     .hero h1 { font-size: 3rem; line-height: 1.05; }
     @media (min-width: 640px) { .hero h1 { font-size: 3.75rem; } }
@@ -138,7 +142,7 @@
     .actions { display: flex; flex-wrap: wrap; gap: var(--s-sm); margin-top: var(--s-sm); }
 
     .hero-photo { position: relative; max-width: 26rem; justify-self: center; width: 100%; order: -1; }
-    @media (min-width: 768px) { .hero-photo { order: 0; } }
+    @media (min-width: 768px) { .hero-photo { order: 0; justify-self: end; } }
     @media (max-width: 767px) { .hero-photo { max-width: 13rem; } }
     .hero-photo::before {
       content: ""; position: absolute; inset: -30% -20%; z-index: -1;
@@ -167,7 +171,7 @@
 
     /* ---------- Bio ---------- */
     .bio { display: grid; gap: var(--s-xl); }
-    @media (min-width: 900px) { .bio { grid-template-columns: 1fr 18rem; align-items: start; } }
+    @media (min-width: 900px) { .bio { grid-template-columns: 1fr 26rem; align-items: start; } }
     .prose { display: grid; gap: var(--s-md); max-width: 42rem; }
     .prose p:first-child { color: var(--cs-hi); }
 
@@ -185,7 +189,8 @@
       border-bottom: 1px solid var(--cs-rim);
     }
     .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-sm); }
-    .facts li { display: grid; gap: 2px; }
+    .facts li { display: grid; gap: 2px; min-width: 0; }
+    .facts a, .facts .v { overflow-wrap: anywhere; }
     .facts .k { color: var(--cs-lo); font-size: 0.75rem; }
     .facts .v { color: var(--cs-hi); }
     .facts a { color: var(--cs-hi); text-decoration-color: rgba(240, 160, 48, 0.5); text-underline-offset: 3px; }
@@ -212,7 +217,7 @@
       border-bottom: 1px solid var(--cs-rim);
     }
     .project-compact { padding-top: var(--s-lg); }
-    .project-compact .meta { word-break: break-all; }
+    .project-compact h4 + .meta { margin-top: -8px; overflow-wrap: anywhere; }
     .grid { display: grid; gap: var(--s-md); grid-template-columns: 1fr; }
     @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -262,7 +267,7 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#bio">Bio</a></li>
         <li><a href="#talks">Talks</a></li>
-        <li><a href="#built">Built</a></li>
+        <li><a href="#built">Projects</a></li>
       </ul>
     </div>
   </header>
@@ -394,8 +399,8 @@
           <div class="grid">
             <article class="card project project-compact">
               <div class="project-body">
-                <p class="meta">thelemon2020/pest-plugin-pom</p>
                 <h4>Pest POM</h4>
+                <p class="meta">thelemon2020/pest-plugin-pom</p>
                 <p>A Pest plugin for writing browser tests with the Page Object Model, built on pest-plugin-browser.</p>
                 <ul class="pills"><li class="pill">PHP</li><li class="pill">Pest</li><li class="pill">Browser testing</li></ul>
                 <div class="links"><a class="text-link" href="https://github.com/thelemon2020/pest-plugin-pom">Source</a><a class="text-link" href="https://packagist.org/packages/thelemon2020/pest-plugin-pom">Packagist</a></div>
@@ -403,8 +408,8 @@
             </article>
             <article class="card project project-compact">
               <div class="project-body">
-                <p class="meta">thelemon2020/nativephp-shazamkit</p>
                 <h4>NativePHP ShazamKit</h4>
+                <p class="meta">thelemon2020/nativephp-shazamkit</p>
                 <p>ShazamKit audio recognition for NativePHP Mobile. Identify songs from ambient audio on iOS and Android.</p>
                 <ul class="pills"><li class="pill">NativePHP</li><li class="pill">iOS</li><li class="pill">Android</li></ul>
                 <div class="links"><a class="text-link" href="https://nativephp.com/plugins/thelemon2020/nativephp-shazamkit">NativePHP Marketplace</a></div>
