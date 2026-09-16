@@ -2,7 +2,7 @@
 
 A single static page, `index.html`, with no build step and no backend. It uses the CollectShine theme ("The Listening Room After Dark").
 
-The Bio, Talks and Built sections act like separate pages through the URL hash (`/#talks`, `/#built`). If JavaScript is off, the page shows as one long scroll.
+The Bio, Talks and Projects sections act like separate pages through the URL hash (`/#talks`, `/#projects`). If JavaScript is off, the page shows as one long scroll.
 
 ## Edit content
 Everything is in `index.html`. Search for `TODO` and `[Placeholder]`.
