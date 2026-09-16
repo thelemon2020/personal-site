@@ -232,12 +232,9 @@
     .project-thumb-logo img { position: absolute; inset: 15% 0; width: 100%; height: 70%; object-fit: contain; }
     .project-body { padding: var(--s-lg); display: flex; flex-direction: column; gap: var(--s-sm); flex: 1; }
     .project-body > p:not(.meta) { flex: 1; }
-    .pills { display: flex; flex-wrap: wrap; gap: var(--s-xs); list-style: none; margin: 0; padding: 0; }
-    .pill {
-      padding: 2px 10px; border-radius: var(--r-full);
-      background: var(--cs-bg); border: 1px solid var(--cs-rim);
-      color: var(--cs-mid); font-size: 0.75rem;
-    }
+    .pills { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; font-size: 0.75rem; }
+    .pill { color: var(--cs-mid); }
+    .pill + .pill::before { content: "\00B7"; content: "\00B7" / ""; padding: 0 8px; color: var(--cs-lo); }
     .links { display: flex; flex-wrap: wrap; gap: var(--s-sm); }
     .text-link { color: var(--cs-hi); font-weight: 500; text-decoration: none; }
     .text-link:hover { color: var(--cs-gold); }
